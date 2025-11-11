@@ -10,6 +10,7 @@ let score = 0;
 let lane = 1; // 0=左,1=中央,2=右
 let enemies = [];
 let combo = 0;
+let actuallyCombo = 0;
 let lives = 3;
 let gameRunning = false;
 
@@ -95,13 +96,12 @@ function performAttack() {
 
     if (hit) {
         combo++;
-        comboText.textContent = `Combo: ${combo}`;
-        console.log(combo);
+        actuallyCombo++;
+        comboText.textContent = `Combo: ${actuallyCombo}`;
         if (combo >= 5) {
             combo = 5;
         }
         score += (combo) * 10;
-        console.log(score);
     } else {
         combo = 0;
     }
