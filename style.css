@@ -63,6 +63,15 @@ body {
   z-index: 999;
 }
 
+#score {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  color: white;
+  font-size: 20px;
+  z-index: 999;
+}
+
 #lives {
   position: fixed;      /* fixed にして画面に固定 */
   top: 20px;            /* 上から20px */

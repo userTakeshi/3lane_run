@@ -4,6 +4,7 @@ const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
 const titleScreen = document.getElementById("titleScreen");
 const startButton = document.getElementById("startButton");
+const comboText = document.getElementById("combo");
 
 let score = 0;
 let lane = 1; // 0=左,1=中央,2=右
@@ -94,6 +95,7 @@ function performAttack() {
 
     if (hit) {
         combo++;
+        comboText.textContent = `Combo: ${combo}`;
         console.log(combo);
         if (combo >= 5) {
             combo = 5;
