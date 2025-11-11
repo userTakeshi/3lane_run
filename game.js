@@ -92,12 +92,15 @@ function performAttack() {
 
   enemies = enemies.filter(e => e !== null);
 
-  if (hit) {
-    combo++;
-    score += 10 * combo;
-  } else {
-    combo = 0;
-  }
+  const MAX_COMBO = 5;  // コンボ上限
+
+    if (hit) {
+        combo++;
+        if (combo > MAX_COMBO) combo = MAX_COMBO;
+        score += 10 + (combo - 1) * 10; // 1コンボ目は10点、2コンボ目以降は+10点ずつ
+    } else {
+        combo = 0;
+    }
 
   scoreDisplay.textContent = `Score: ${score}`;
 }
