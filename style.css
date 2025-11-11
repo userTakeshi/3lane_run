@@ -60,17 +60,20 @@ body {
   left: 10px;
   color: white;
   font-size: 20px;
-  z-index: 20;
+  z-index: 999;
 }
 
 #lives {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: red;
-  font-size: 20px;
-  z-index: 20;
+  position: fixed;      /* fixed にして画面に固定 */
+  top: 20px;            /* 上から20px */
+  right: 20px;          /* 右から20px */
+  font-size: 24px;      /* サイズ大きめで見やすく */
+  color: red;           /* 赤でハート */
+  z-index: 999;         /* 高めの z-index で前面表示 */
+  pointer-events: none; /* タッチ操作を邪魔しない */
 }
+
+
 
 /* 既存CSSはそのまま使う */
 
