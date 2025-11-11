@@ -109,3 +109,35 @@ body {
   background: #4caf50;
   color: white;
 }
+
+#endGameContainer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#222, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 上下中央 */
+  align-items: center;     /* 左右中央 */
+  color: white;
+  font-size: 24px;
+  z-index: 100;
+}
+
+#endScore {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+#photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#photo img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
