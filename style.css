@@ -145,3 +145,10 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
+
+html, body {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
