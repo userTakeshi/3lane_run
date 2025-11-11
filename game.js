@@ -63,7 +63,7 @@ function performAttack() {
   // 攻撃エフェクト
   const effect = document.createElement("div");
   const playerRect = player.getBoundingClientRect();
-  effect.style.top = playerRect.top - 50 + "px"; // プレイヤーの上に表示
+  effect.style.top = playerRect.top - 60 + "px"; // プレイヤーの上に表示
   effect.style.position = "absolute";
   effect.style.width = "10px";
   effect.style.height = "80px";
