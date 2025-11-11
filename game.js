@@ -94,10 +94,12 @@ function performAttack() {
 
     if (hit) {
         combo++;
+        console.log(combo);
         if (combo >= 5) {
             combo = 5;
         }
         score += (combo) * 10;
+        console.log(score);
     } else {
         combo = 0;
     }
