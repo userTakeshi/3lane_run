@@ -92,13 +92,13 @@ function performAttack() {
 
   enemies = enemies.filter(e => e !== null);
 
-  const MAX_COMBO = 5;  // コンボ上限
-
     if (hit) {
         combo++;
-        if (combo > MAX_COMBO) {
-            combo = MAX_COMBO;
-            score += 10 + (combo - 1) * 10;
+        if (combo >= 5) {
+            score += 10 + (5) * 10;
+        }
+        else if(combo < 4){
+            score += 10 + (combo) * 10;
         }
     } else {
         combo = 0;
