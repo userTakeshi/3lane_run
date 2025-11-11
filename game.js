@@ -8,6 +8,7 @@ const startButton = document.getElementById("startButton");
 const comboText = document.getElementById("combo");
 const endScore = document.getElementById("endScore");
 const endText = document.getElementById("endText");
+const clearPhoto = document.getElementById("clearPhoto");
 
 let score = 0;
 let lane = 1; // 0=左,1=中央,2=右
@@ -79,8 +80,6 @@ function performAttack() {
   gameContainer.appendChild(effect);
   setTimeout(() => gameContainer.removeChild(effect), 100);
 
-  let hit = false;
-
   enemies.forEach((enemy, i) => {
     const playerRect = player.getBoundingClientRect();
     const enemyRect = enemy.getBoundingClientRect();
@@ -91,13 +90,7 @@ function performAttack() {
     if (near) {
       gameContainer.removeChild(enemy);
       enemies[i] = null;
-      hit = true;
-    }
-  });
 
-  enemies = enemies.filter(e => e !== null);
-
-    if (hit) {
         combo++;
         actuallyCombo++;
         comboText.textContent = `Combo: ${actuallyCombo}`;
@@ -105,10 +98,10 @@ function performAttack() {
             combo = 5;
         }
         score += (combo) * 10;
-    } else {
-        combo = 0;
-        actuallyCombo = 0;
     }
+  });
+
+  enemies = enemies.filter(e => e !== null);
 
   scoreDisplay.textContent = `Score: ${score}`;
 }
@@ -140,11 +133,17 @@ function update() {
       enemy.dataset.lane == lane
     ) {
       hitPlayer();
+      combo = 0;
+      actuallyCombo = 0;
+      comboText.textContent = `Combo: 0`;
       gameContainer.removeChild(enemy);
       enemies[i] = null;
     }
 
     if (top > window.innerHeight) {
+      combo = 0;
+      actuallyCombo = 0;
+      comboText.textContent = `Combo: 0`;
       gameContainer.removeChild(enemy);
       enemies[i] = null;
     }
@@ -155,6 +154,7 @@ function update() {
         endGameContainer.style.display = "block";
         endScore.textContent = `Score: ${score}`;
         endText.style.display = "block";
+        clearPhoto.style.display = "block";
     }
   });
 
