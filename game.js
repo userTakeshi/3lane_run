@@ -62,12 +62,13 @@ function createEnemy() {
 function performAttack() {
   // 攻撃エフェクト
   const effect = document.createElement("div");
+  const playerRect = player.getBoundingClientRect();
+  effect.style.top = playerRect.top - 70 + "px"; // プレイヤーの上に表示
   effect.style.position = "absolute";
   effect.style.width = "10px";
-  effect.style.height = "50px";
+  effect.style.height = "80px";
   effect.style.background = "yellow";
   effect.style.left = player.style.left;
-  effect.style.bottom = "60px";
   effect.style.transform = "translateX(-50%)";
   effect.style.borderRadius = "5px";
   gameContainer.appendChild(effect);
@@ -79,7 +80,7 @@ function performAttack() {
     const playerRect = player.getBoundingClientRect();
     const enemyRect = enemy.getBoundingClientRect();
     const near =
-      Math.abs(enemyRect.top - playerRect.top) < 80 &&
+      Math.abs(enemyRect.top - playerRect.top) < 120 &&
       enemy.dataset.lane == lane;
 
     if (near) {
