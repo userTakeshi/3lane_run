@@ -2,12 +2,15 @@ const gameContainer = document.getElementById("gameContainer");
 const player = document.getElementById("player");
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
+const titleScreen = document.getElementById("titleScreen");
+const startButton = document.getElementById("startButton");
 
 let score = 0;
 let lane = 1; // 0=左,1=中央,2=右
 let enemies = [];
 let combo = 0;
 let lives = 3;
+let gameRunning = false;
 
 // レーンの中心X座標
 function getLaneX(lane) {
@@ -23,20 +26,20 @@ player.style.left = `${getLaneX(lane)}px`;
 // スワイプで移動・タップで攻撃
 let touchStartX = null;
 document.addEventListener("touchstart", e => {
+  if (!gameRunning) return;
   touchStartX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchend", e => {
+  if (!gameRunning) return;
   if (touchStartX === null) return;
   const diff = e.changedTouches[0].clientX - touchStartX;
 
   if (Math.abs(diff) > 50) {
-    // 左右スワイプで移動
     if (diff > 0 && lane < 2) lane++;
     if (diff < 0 && lane > 0) lane--;
     player.style.left = `${getLaneX(lane)}px`;
   } else {
-    // タップで攻撃
     performAttack();
   }
   touchStartX = null;
@@ -44,6 +47,7 @@ document.addEventListener("touchend", e => {
 
 // 敵生成
 function createEnemy() {
+  if (!gameRunning) return;
   const enemy = document.createElement("div");
   enemy.classList.add("enemy");
   const enemyLane = Math.floor(Math.random() * 3);
@@ -54,18 +58,16 @@ function createEnemy() {
   enemies.push(enemy);
 }
 
-// 攻撃処理（タップ）
+// 攻撃処理
 function performAttack() {
   // 攻撃エフェクト
   const effect = document.createElement("div");
-  const playerRect = player.getBoundingClientRect();
-  effect.style.top = playerRect.top - 70 + "px"; // プレイヤーの上に表示
   effect.style.position = "absolute";
   effect.style.width = "10px";
-  effect.style.height = "80px";
+  effect.style.height = "50px";
   effect.style.background = "yellow";
   effect.style.left = player.style.left;
-//   effect.style.bottom = "60px";
+  effect.style.bottom = "60px";
   effect.style.transform = "translateX(-50%)";
   effect.style.borderRadius = "5px";
   gameContainer.appendChild(effect);
@@ -77,7 +79,7 @@ function performAttack() {
     const playerRect = player.getBoundingClientRect();
     const enemyRect = enemy.getBoundingClientRect();
     const near =
-      Math.abs(enemyRect.top - playerRect.top) < 120 &&
+      Math.abs(enemyRect.top - playerRect.top) < 80 &&
       enemy.dataset.lane == lane;
 
     if (near) {
@@ -90,7 +92,7 @@ function performAttack() {
   enemies = enemies.filter(e => e !== null);
 
   if (hit) {
-    ++combo;
+    combo++;
     score += 10 * combo;
   } else {
     combo = 0;
@@ -112,14 +114,15 @@ function hitPlayer() {
 
 // ゲームループ
 function update() {
+  if (!gameRunning) return;
+
   enemies.forEach((enemy, i) => {
     const top = parseFloat(enemy.style.top);
-    enemy.style.top = top + 3 + "px"; // y移動速度
+    enemy.style.top = top + 3 + "px";
 
     const playerRect = player.getBoundingClientRect();
     const enemyRect = enemy.getBoundingClientRect();
 
-    // 当たり判定
     if (
       Math.abs(enemyRect.top - playerRect.top) < 40 &&
       enemy.dataset.lane == lane
@@ -140,6 +143,23 @@ function update() {
   requestAnimationFrame(update);
 }
 
-// 敵出現間隔
-setInterval(createEnemy, 1200);
-update();
+// タイトル画面の「ゲーム開始」ボタン
+startButton.addEventListener("click", () => {
+  titleScreen.style.display = "none";
+  gameContainer.style.display = "block";
+
+  // ゲーム変数リセット
+  score = 0;
+  combo = 0;
+  lives = 3;
+  lane = 1;
+  player.style.left = `${getLaneX(lane)}px`;
+  scoreDisplay.textContent = `Score: ${score}`;
+  livesDisplay.textContent = "♥".repeat(lives);
+  enemies.forEach(e => gameContainer.removeChild(e));
+  enemies = [];
+
+  gameRunning = true;
+  update();
+  setInterval(createEnemy, 1200);
+});

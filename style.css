@@ -71,3 +71,29 @@ body {
   font-size: 20px;
   z-index: 20;
 }
+
+/* 既存CSSはそのまま使う */
+
+#titleScreen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#333, #111);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  z-index: 50;
+}
+
+#titleScreen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #4caf50;
+  color: white;
+}

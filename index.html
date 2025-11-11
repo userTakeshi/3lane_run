@@ -7,7 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="gameContainer">
+  <!-- タイトル画面 -->
+  <div id="titleScreen">
+    <h1>縦スクロール避けゲーム</h1>
+    <button id="startButton">ゲーム開始</button>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="gameContainer" style="display:none;">
     <div class="lane" id="lane-left"></div>
     <div class="lane" id="lane-center"></div>
     <div class="lane" id="lane-right"></div>
