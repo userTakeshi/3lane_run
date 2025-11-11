@@ -6,6 +6,8 @@ const livesDisplay = document.getElementById("lives");
 const titleScreen = document.getElementById("titleScreen");
 const startButton = document.getElementById("startButton");
 const comboText = document.getElementById("combo");
+const endScore = document.getElementById("endScore");
+const endText = document.getElementById("endText");
 
 let score = 0;
 let lane = 1; // 0=左,1=中央,2=右
@@ -151,6 +153,8 @@ function update() {
         gameRunning = false;
         gameContainer.style.display = "none";
         endGameContainer.style.display = "block";
+        endScore.textContent = `Score: ${score}`;
+        endText.style.display = "block";
     }
   });
 
