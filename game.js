@@ -1,4 +1,5 @@
 const gameContainer = document.getElementById("gameContainer");
+const endGameContainer = document.getElementById("endGameContainer");
 const player = document.getElementById("player");
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
@@ -104,6 +105,7 @@ function performAttack() {
         score += (combo) * 10;
     } else {
         combo = 0;
+        actuallyCombo = 0;
     }
 
   scoreDisplay.textContent = `Score: ${score}`;
@@ -143,6 +145,12 @@ function update() {
     if (top > window.innerHeight) {
       gameContainer.removeChild(enemy);
       enemies[i] = null;
+    }
+
+    if(score >= 5000){
+        gameRunning = false;
+        gameContainer.style.display = "none";
+        endGameContainer.style.display = "block";
     }
   });
 
