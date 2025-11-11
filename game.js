@@ -95,11 +95,9 @@ function performAttack() {
     if (hit) {
         combo++;
         if (combo >= 5) {
-            score += 10 + (5) * 10;
+            combo = 5;
         }
-        else if(combo < 4){
-            score += 10 + (combo) * 10;
-        }
+        score += (combo) * 10;
     } else {
         combo = 0;
     }
