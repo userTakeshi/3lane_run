@@ -157,7 +157,7 @@ function update() {
       enemies[i] = null;
     }
 
-    if(score >= 200){
+    if(score >= 2000){
         gameRunning = false;
         gameContainer.style.display = "none";
         endGameContainer.style.display = "block";
