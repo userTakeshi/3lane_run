@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #111;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#gameContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#333, #111);
+  overflow: hidden;
+}
+
+/* レーン（道）の可視化 */
+.lane {
+  position: absolute;
+  top: 0;
+  width: 33.33%;
+  height: 100%;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#lane-left { left: 0; }
+#lane-center { left: 33.33%; }
+#lane-right { left: 66.66%; }
+
+#player {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: #4caf50;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.enemy {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #e53935;
+  border-radius: 10px;
+  z-index: 5;
+  transform: translateX(-50%);
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 20px;
+  z-index: 20;
+}
+
+#lives {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  font-size: 20px;
+  z-index: 20;
+}
