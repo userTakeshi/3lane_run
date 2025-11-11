@@ -96,8 +96,10 @@ function performAttack() {
 
     if (hit) {
         combo++;
-        if (combo > MAX_COMBO) combo = MAX_COMBO;
-        score += 10 + (combo - 1) * 10; // 1コンボ目は10点、2コンボ目以降は+10点ずつ
+        if (combo > MAX_COMBO) {
+            combo = MAX_COMBO;
+            score += 10 + (combo - 1) * 10;
+        }
     } else {
         combo = 0;
     }
